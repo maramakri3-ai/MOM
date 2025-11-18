@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Graph View -->
+    <record id="mom_meeting_graph_view" model="ir.ui.view">
+        <field name="name">mom.meeting.graph</field>
+        <field name="model">mom.meeting</field>
+        <field name="arch" type="xml">
+            <graph string="Meeting Analysis" type="bar" sample="1">
+                <field name="meeting_type_id"/>
+                <field name="state"/>
+                <field name="total_count" string="Meeting Count"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Pivot View -->
+    <record id="mom_meeting_pivot_view" model="ir.ui.view">
+        <field name="name">mom.meeting.pivot</field>
+        <field name="model">mom.meeting</field>
+        <field name="arch" type="xml">
+            <pivot string="Meeting Analysis" sample="1">
+                <field name="meeting_type_id" type="row"/>
+                <field name="department_ids" type="row"/>
+                <field name="state" type="col"/>
+                <field name="total_count" string="Meeting Count"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Graph Action -->
+    <record id="mom_meeting_graph_action" model="ir.actions.act_window">
+        <field name="name">Meeting Analysis</field>
+        <field name="res_model">mom.meeting</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="mom_meeting_graph_view"/>
+    </record>
+
+    <!-- Pivot Action -->
+    <record id="mom_meeting_pivot_action" model="ir.actions.act_window">
+        <field name="name">Meeting Statistics</field>
+        <field name="res_model">mom.meeting</field>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="mom_meeting_pivot_view"/>
+    </record>
+
+    <!-- Upcoming Meetings Action -->
+    <record id="mom_upcoming_meetings_action" model="ir.actions.act_window">
+        <field name="name">Upcoming Meetings</field>
+        <field name="res_model">mom.meeting</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[('start_date', '>=', context_today().strftime('%Y-%m-%d'))]</field>
+    </record>
+
+    <!-- Overdue Actions -->
+    <record id="mom_overdue_actions_action" model="ir.actions.act_window">
+        <field name="name">Overdue Actions</field>
+        <field name="res_model">mom.action.plan</field>
+        <field name="view_mode">list</field>
+        <field name="domain">[('deadline', '&lt;', context_today().strftime('%Y-%m-%d')), ('state', '!=', 'done')]</field>
+    </record>
+
+    <!-- Dashboard View -->
+    <record id="mom_dashboard_view" model="ir.ui.view">
+        <field name="name">mom.dashboard</field>
+        <field name="model">board.board</field>
+        <field name="arch" type="xml">
+            <form>
+                <board style="2-1">
+                    <column>
+                        <action name="%(mom_meeting_graph_action)d" string="Meeting Analysis"/>
+                        <action name="%(mom_meeting_pivot_action)d" string="Meeting Statistics"/>
+                    </column>
+                    <column>
+                        <action name="%(mom_upcoming_meetings_action)d" string="Upcoming Meetings"/>
+                        <action name="%(mom_overdue_actions_action)d" string="Overdue Actions"/>
+                    </column>
+                </board>
+            </form>
+        </field>
+    </record>
+
+    <!-- Dashboard Action -->
+    <record id="action_mom_dashboard" model="ir.actions.act_window">
+        <field name="name">MOM Dashboard</field>
+        <field name="res_model">board.board</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="mom_dashboard_view"/>
+    </record>
+</odoo>

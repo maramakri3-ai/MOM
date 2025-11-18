@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- MOM Approval Activity Type -->
+        <record id="mail_activity_mom_approval" model="mail.activity.type">
+            <field name="name">MOM Approval</field>
+            <field name="summary">Review and approve meeting minutes</field>
+            <field name="category">default</field>
+            <field name="res_model">mom.meeting</field>
+            <field name="icon">fa-check-square-o</field>
+            <field name="delay_count">1</field>
+            <field name="delay_unit">days</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- Action Plan Follow-up Activity Type -->
+        <record id="mail_activity_action_plan_follow_up" model="mail.activity.type">
+            <field name="name">Action Plan Follow-up</field>
+            <field name="summary">Follow up on assigned action items</field>
+            <field name="category">default</field>
+            <field name="res_model">mom.action.plan</field>
+            <field name="icon">fa-tasks</field>
+            <field name="delay_count">1</field>
+            <field name="delay_unit">days</field>
+        </record>
+    </data>
+</odoo>

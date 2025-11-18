@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Default Action for Users -->
+    <record id="action_mom_meeting" model="ir.actions.act_window">
+        <field name="name">Meetings</field>
+        <field name="res_model">mom.meeting</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_my_meetings': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first meeting minutes!
+            </p>
+        </field>
+    </record>
+
+    <!-- Manager Action -->
+    <record id="action_mom_meeting_manager" model="ir.actions.act_window">
+        <field name="name">All Meetings</field>
+        <field name="res_model">mom.meeting</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_group_by_department': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first meeting minutes!
+            </p>
+        </field>
+    </record>
+
+    <!-- Action for Stages -->
+    <record id="action_mom_stages" model="ir.actions.act_window">
+        <field name="name">Meeting Stages</field>
+        <field name="res_model">mom.stage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new meeting stage
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_mom_root"
+              name="Meeting Minutes"
+              web_icon="MOM,static/description/icon.png"
+              sequence="100"/>
+
+    <!-- Dashboard Menu - Temporarily disabled
+    <menuitem
+        id="menu_mom_dashboard"
+        name="Dashboard"
+        action="action_mom_dashboard"
+        parent="menu_mom_root"
+        sequence="1"/>
+    -->
+
+    <!-- Meeting Minutes Menu -->
+    <menuitem id="menu_mom_meetings"
+              name="Meetings"
+              parent="menu_mom_root"
+              action="action_mom_meeting"
+              sequence="10"
+              groups="group_mom_user,group_mom_manager,group_mom_attendee"/>
+
+    <!-- Action Plans Menu -->
+    <menuitem id="menu_mom_action_plans"
+              name="Action Plans"
+              parent="menu_mom_root"
+              action="action_mom_action_plan"
+              sequence="20"
+              groups="group_mom_user,group_mom_manager,group_mom_attendee"/>
+              
+    <!-- Quick Create Action Plan Menu (Manager Only) -->
+    <menuitem id="menu_mom_standalone_action_plan"
+              name="Quick Create Action Plan"
+              parent="menu_mom_root"
+              action="MOM.action_mom_action_plan_manager"
+              sequence="25"
+              groups="MOM.group_mom_manager"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_mom_config"
+              name="Configuration"
+              parent="menu_mom_root"
+              sequence="100"
+              groups="group_mom_manager"/>
+
+    <!-- Meeting Types Configuration Menu -->
+    <menuitem id="menu_mom_meeting_types"
+              name="Meeting Types"
+              parent="menu_mom_config"
+              action="action_mom_meeting_type"
+              sequence="5"/>
+
+    <!-- Stages Configuration Menu -->
+    <menuitem id="menu_mom_stages"
+              name="Meeting Stages"
+              parent="menu_mom_config"
+              action="action_mom_stages"
+              sequence="10"/>
+</odoo>

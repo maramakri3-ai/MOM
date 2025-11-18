@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- New Stage -->
+        <record id="stage_new" model="mom.stage">
+            <field name="name">New</field>
+            <field name="sequence">10</field>
+            <field name="fold">False</field>
+            <field name="description">New meetings that are being drafted</field>
+        </record>
+
+        <!-- In Progress Stage -->
+        <record id="stage_in_progress" model="mom.stage">
+            <field name="name">In Progress</field>
+            <field name="sequence">20</field>
+            <field name="fold">False</field>
+            <field name="description">Meetings with ongoing action items</field>
+        </record>
+
+        <!-- Follow Up Stage -->
+        <record id="stage_follow_up" model="mom.stage">
+            <field name="name">Follow Up</field>
+            <field name="sequence">30</field>
+            <field name="fold">False</field>
+            <field name="description">Meetings requiring follow-up on action items</field>
+        </record>
+
+        <!-- Done Stage -->
+        <record id="stage_done" model="mom.stage">
+            <field name="name">Done</field>
+            <field name="sequence">40</field>
+            <field name="fold">True</field>
+            <field name="description">Completed meetings with all action items resolved</field>
+        </record>
+
+        <!-- Archived Stage -->
+        <record id="stage_archived" model="mom.stage">
+            <field name="name">Archived</field>
+            <field name="sequence">50</field>
+            <field name="fold">True</field>
+            <field name="description">Old meetings that are archived for reference</field>
+        </record>
+    </data>
+</odoo>

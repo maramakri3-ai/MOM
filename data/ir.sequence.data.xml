@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="seq_mom_meeting" model="ir.sequence">
+            <field name="name">MOM Sequence</field>
+            <field name="code">mom.meeting</field>
+            <field name="prefix">MOM/%(year)s/%(month)s/</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
